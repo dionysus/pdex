@@ -31,5 +31,8 @@ class _Result {
     get gen => _gen;
     get type => _type;
 
+    get thumb => 'assets/images/pokeThumbs/'+ _id.toString() + '.png';
+    get idString => _id.toString().padLeft(4, '0');
+    get nameCap => _name[0].toUpperCase() + _name.substring(1);
 }
 

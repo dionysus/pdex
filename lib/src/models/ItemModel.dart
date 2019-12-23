@@ -17,6 +17,10 @@ class _Result {
     String _name;
     int _id;
     int _gen;
+    Map _stats;
+    // int _attack;
+    // int _defense;
+    // int _speed;
     List<dynamic> _type;
 
     _Result(result){
@@ -24,12 +28,17 @@ class _Result {
         _name = result['name'];
         _gen = result['gen'];
         _type = result['type'];
+        _stats = result['stats'];
     }
 
     get name => _name;
     get id => _id;
     get gen => _gen;
     get type => _type;
+    get hp => _stats['hp'];
+    get attack => _stats['attack'];
+    get defense => _stats['defense'];
+    get speed => _stats['speed'];
 
     get thumb => 'assets/images/pokeThumbs/'+ _id.toString() + '.png';
     get idString => _id.toString().padLeft(4, '0');

@@ -25,13 +25,13 @@ class ItemDetailsScreen extends StatelessWidget{
 						Text(pokemon.idString),
 						Text(this._getTypes()),
 						SizedBox(height: 10),
-						LinearBar(fill: pokemon.hp.toDouble()),
+						LinearBar(fill: pokemon.hp),
 						SizedBox(height: 10),
-						LinearBar(fill: pokemon.attack.toDouble()),
+						LinearBar(fill: pokemon.attack),
 						SizedBox(height: 10),
-						LinearBar(fill: pokemon.defense.toDouble()),
+						LinearBar(fill: pokemon.defense),
 						SizedBox(height: 10),
-						LinearBar(fill: pokemon.speed.toDouble()),
+						LinearBar(fill: pokemon.speed),
 					],
 				)
 			)

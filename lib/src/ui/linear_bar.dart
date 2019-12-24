@@ -1,34 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class LinearBar extends StatelessWidget{
+class LinearBar extends StatefulWidget{
 
 	const LinearBar({
 		Key key,
 		this.fill,
-		this.max = 255,
-		this.fillColor = Colors.red,
-		this.bgColor = Colors.grey
 	}) : super(key: key);
 
-	final fill;
-	final max;
-	final fillColor;
-	final bgColor;
+	final double fill;
+
+	@override
+	_LinearBarState createState() => _LinearBarState();
+
+}
+
+class _LinearBarState extends State<LinearBar> with SingleTickerProviderStateMixin{
+
+	final max = 255;
+	final fillColor = Colors.red;
+	final bgColor = Colors.red[100];
+
+	Animation animation;
+	AnimationController controller;
+
+	@override
+	void initState() {
+		super.initState();
+		controller = new AnimationController(
+			vsync: this,
+			duration: Duration(seconds: 1)
+		);
+		Tween tween = new Tween<double>(begin: 0, end: widget.fill);
+		animation = tween.animate(controller);
+		animation.addListener(() {
+			setState(() {});
+		});
+		controller.forward();
+	}
+
+	@override
+	void dispose() {
+		controller.dispose();
+		super.dispose();
+	}
 
 	@override
 	Widget build(BuildContext context){
 		return Row(
-			children:[ 
-			Flexible(
-				fit: FlexFit.tight,
-				flex: fill,
-				child: FillBox(color: fillColor),
-			),
-			Flexible(
-				fit: FlexFit.tight,
-				flex: max - fill,
-				child: FillBox(color: bgColor),
+			children:[
+				Flexible(
+					fit: FlexFit.tight,
+					flex: animation.value.floor(),
+					child: FillBox(color: fillColor),
+				),
+				Flexible(
+					fit: FlexFit.tight,
+					flex: (max - animation.value).floor(),
+					child: FillBox(color: bgColor),
 				)
 			]
 		);

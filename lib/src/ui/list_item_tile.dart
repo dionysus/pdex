@@ -15,18 +15,26 @@ class ListItemTile extends StatelessWidget{
     @override
     Widget build(BuildContext context){
         return ListTile(
-            leading: Image.asset(pokemon.thumb),
+            leading: Hero(
+                tag: pokemon.name + 'Hero',
+                child: Image.asset(pokemon.thumb),
+            ),
             title: Text(pokemon.nameCap),
             subtitle: Text(pokemon.idString + " / " + this._getTypes()),
             trailing: Icon(Icons.keyboard_arrow_right),
-            onTap:(){
-                Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ItemDetailsScreen(pokemon: pokemon),
-                    ),
-                );
-            }
+            onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return ItemDetailsScreen(pokemon: pokemon);
+                }));
+            },
+//            onTap:(){
+//                Navigator.of(context).push(
+//                    MaterialPageRoute(
+//                        builder: (context) =>
+//                            ItemDetailsScreen(pokemon: pokemon),
+//                    ),
+//                );
+//            }
         );
     }
 

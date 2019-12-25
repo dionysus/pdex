@@ -4,13 +4,13 @@ import 'package:flutter/widgets.dart';
 import 'package:pdex/src/ui/linear_bar.dart';
 
 class ItemDetailsScreen extends StatelessWidget{
+
 	final pokemon;
 
 	const ItemDetailsScreen({Key key, this.pokemon}) : super (key: key);
 
 	@override
 	Widget build(BuildContext context){
-		final textTheme = Theme.of(context).textTheme;
 
 		return Scaffold(
 			appBar: AppBar(
@@ -21,7 +21,10 @@ class ItemDetailsScreen extends StatelessWidget{
 					mainAxisAlignment: MainAxisAlignment.start,
 					crossAxisAlignment: CrossAxisAlignment.center,
 					children: <Widget>[
-						Image.asset(pokemon.thumb),
+						Hero(
+							tag: pokemon.name + 'Hero',
+							child: Image.asset(pokemon.thumb),
+						),
 						Text(pokemon.idString),
 						Text(this._getTypes()),
 						SizedBox(height: 10),

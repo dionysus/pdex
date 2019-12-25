@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pdex/src/blocs/list_bloc.dart';
 import 'package:pdex/src/models/ItemModel.dart';
@@ -15,11 +16,13 @@ class ListScreen extends StatelessWidget {
 
         return BlocProvider<ListBloc>(
             bloc: bloc,
-            child: Scaffold(
-                appBar: AppBar(
-                    title: Text('PokeDex List'),
+            child: CupertinoPageScaffold(
+                navigationBar: CupertinoNavigationBar(
+                    middle: Text('PokeDex List'),
                 ),
-                body: _buildBody(bloc),
+                child: SafeArea(
+                    child: _buildBody(bloc),
+                )
             )
         );
     }
@@ -40,8 +43,11 @@ class ListScreen extends StatelessWidget {
 
     Widget _buildList(ItemModel results) {
 
-        return ListView.builder(
+        return GridView.builder(
             itemCount: results.results.length,
+            gridDelegate:
+                new SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3),
             itemBuilder: (BuildContext context, int index) {
                 final pokemon = results.results[index];
                 return ListItemTile(pokemon: pokemon);

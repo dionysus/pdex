@@ -51,7 +51,8 @@ class _LinearBarState extends State<LinearBar> with SingleTickerProviderStateMix
 			children:[
 			    Container(
                     width: 50,
-                    child: Text(animation.value.toString()),
+                    child: Text(animation.value.toString(),
+                        style: TextStyle(fontSize: 10),),
                 ),
 				Flexible(
 					fit: FlexFit.tight,
@@ -63,9 +64,14 @@ class _LinearBarState extends State<LinearBar> with SingleTickerProviderStateMix
 					flex: max - animation.value,
 					child: FillBox(color: bgColor),
 				),
-                SizedBox(
+                Container(
                     width: 50,
-                )
+                    child: Text(animation.value.toString().padLeft(3, '0'),
+                        style: TextStyle(fontSize: 10),),
+                ),
+//                SizedBox(
+//                    width: 50,
+//                )
 			]
 		);
 	}

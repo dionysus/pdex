@@ -41,6 +41,7 @@ class _Result {
     get speed => _stats['speed'];
 
     get thumb => 'assets/images/pokeThumbs/'+ _id.toString() + '.png';
+    get sprite => 'assets/images/sprites/'+ _id.toString().padLeft(3, '0') + '.png';
     get idString => _id.toString().padLeft(4, '0');
     get nameCap => _name[0].toUpperCase() + _name.substring(1);
 }

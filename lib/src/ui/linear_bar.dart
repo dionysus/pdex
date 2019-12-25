@@ -8,7 +8,7 @@ class LinearBar extends StatefulWidget{
 		this.fill,
 	}) : super(key: key);
 
-	final double fill;
+	final int fill;
 
 	@override
 	_LinearBarState createState() => _LinearBarState();
@@ -31,7 +31,7 @@ class _LinearBarState extends State<LinearBar> with SingleTickerProviderStateMix
 			vsync: this,
 			duration: Duration(seconds: 1)
 		);
-		Tween tween = new Tween<double>(begin: 0, end: widget.fill);
+		IntTween tween = new IntTween(begin: 0, end: widget.fill);
 		animation = tween.animate(controller);
 		animation.addListener(() {
 			setState(() {});
@@ -49,16 +49,23 @@ class _LinearBarState extends State<LinearBar> with SingleTickerProviderStateMix
 	Widget build(BuildContext context){
 		return Row(
 			children:[
+			    Container(
+                    width: 50,
+                    child: Text(animation.value.toString()),
+                ),
 				Flexible(
 					fit: FlexFit.tight,
-					flex: animation.value.floor(),
+					flex: animation.value,
 					child: FillBox(color: fillColor),
 				),
 				Flexible(
 					fit: FlexFit.tight,
-					flex: (max - animation.value).floor(),
+					flex: max - animation.value,
 					child: FillBox(color: bgColor),
-				)
+				),
+                SizedBox(
+                    width: 50,
+                )
 			]
 		);
 	}
